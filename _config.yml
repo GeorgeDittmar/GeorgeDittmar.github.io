@@ -5,7 +5,7 @@ description: > # this means to ignore newlines until "baseurl:"
   Machine Learning / Big Data developer in PDX trying to build a nicer skynet
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "georgedittmar.github.io" # the base hostname & protocol for your site
-twitter_username: GDittmar
+twitter_username: GeorgeDittmar
 github_username:  GeorgeDittmar
 
 # Build settings
