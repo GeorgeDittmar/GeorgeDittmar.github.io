@@ -6,9 +6,43 @@
 </description>
     <link>georgedittmar.github.io/</link>
     <atom:link href="georgedittmar.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 08 Apr 2015 22:44:17 -0700</pubDate>
-    <lastBuildDate>Wed, 08 Apr 2015 22:44:17 -0700</lastBuildDate>
+    <pubDate>Sun, 12 Apr 2015 23:39:20 -0700</pubDate>
+    <lastBuildDate>Sun, 12 Apr 2015 23:39:20 -0700</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Discussion of Text Clustering and why I cant come up with a better title</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;Anxiety is the hand maiden of creativity.
+-T. S. Eliot&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The above quote I think sums up how I feel about my work and putting it out there for others to see. My anxiety when creating new
+projects or trying to talk about something with authority to someone drives my thirst for knowledge and wanting to know I am
+correct in my understanding of things. This also drives my need to build things on my own and try to implement things with my own creative twist
+with the hope that it might be useful for others.&lt;/p&gt;
+
+&lt;p&gt;Now this blog post isnt going to be about why I do what I do but I wanted it to be an intro to something I started a year ago while job hunting
+as a way to keep my brain active and not fall victim to complacency in my skills. So for this post I will try to describe how to do
+simple document clustering using K-Means and K-NN to learn book genre’s. This will also be a good test of how well I know this material, and
+how well I can explain my understanding.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 11 Apr 2015 15:21:00 -0700</pubDate>
+        <link>georgedittmar.github.io/machine/learning,/nlp,/text/clustering/2015/04/11/TextClustering.html</link>
+        <guid isPermaLink="true">georgedittmar.github.io/machine/learning,/nlp,/text/clustering/2015/04/11/TextClustering.html</guid>
+        
+        
+        <category>machine</category>
+        
+        <category>learning,</category>
+        
+        <category>nlp,</category>
+        
+        <category>text</category>
+        
+        <category>clustering</category>
+        
+      </item>
     
       <item>
         <title>Getting Back on The Machine Learning Horse</title>

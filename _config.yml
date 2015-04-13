@@ -2,10 +2,10 @@
 title: George's Tech Musings
 email: georgedittmar@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  Machine Learning / Big Data developer in PDX
+  Machine Learning / Big Data developer in PDX trying to build skynet
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "georgedittmar.github.io" # the base hostname & protocol for your site
-twitter_username: GeorgeDittmar
+twitter_username: GDittmar
 github_username:  GeorgeDittmar
 
 # Build settings
