@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>George&#39;s Tech Musings</title>
-    <description>Machine Learning / Big Data developer in PDX
+    <description>Machine Learning / Big Data developer in PDX trying to build skynet
 </description>
     <link>georgedittmar.github.io/</link>
     <atom:link href="georgedittmar.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 12 Apr 2015 23:39:20 -0700</pubDate>
-    <lastBuildDate>Sun, 12 Apr 2015 23:39:20 -0700</lastBuildDate>
+    <pubDate>Sun, 12 Apr 2015 23:49:07 -0700</pubDate>
+    <lastBuildDate>Sun, 12 Apr 2015 23:49:07 -0700</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
-        <title>Discussion of Text Clustering and why I cant come up with a better title</title>
+        <title>Insert Title Here...</title>
         <description>&lt;blockquote&gt;
   &lt;p&gt;Anxiety is the hand maiden of creativity.
 -T. S. Eliot&lt;/p&gt;
@@ -23,24 +23,24 @@ correct in my understanding of things. This also drives my need to build things 
 with the hope that it might be useful for others.&lt;/p&gt;
 
 &lt;p&gt;Now this blog post isnt going to be about why I do what I do but I wanted it to be an intro to something I started a year ago while job hunting
-as a way to keep my brain active and not fall victim to complacency in my skills. So for this post I will try to describe how to do
+as a way to keep my brain active and not fall victim to complacency in my skills. So for the next series of posts I will try to describe how to do
 simple document clustering using K-Means and K-NN to learn book genre’s. This will also be a good test of how well I know this material, and
 how well I can explain my understanding.&lt;/p&gt;
+
+&lt;p&gt;First I’ll give a basic definition of what problem we are wanting to solve and the setup of the the data. Secondly I’ll discuss the algorithms
+being used, hopefully with useful citations, that will give some validity to what I am talking about. I am still working out if this will be a
+single blog post or multiple smaller posts. I guess we shall see how things go and hopefully this will keep me wanting to post more as I learn new things
+or work on things.&lt;/p&gt;
+
+&lt;p&gt;– G&lt;/p&gt;
+
 </description>
         <pubDate>Sat, 11 Apr 2015 15:21:00 -0700</pubDate>
-        <link>georgedittmar.github.io/machine/learning,/nlp,/text/clustering/2015/04/11/TextClustering.html</link>
-        <guid isPermaLink="true">georgedittmar.github.io/machine/learning,/nlp,/text/clustering/2015/04/11/TextClustering.html</guid>
+        <link>georgedittmar.github.io/random/2015/04/11/TextClustering.html</link>
+        <guid isPermaLink="true">georgedittmar.github.io/random/2015/04/11/TextClustering.html</guid>
         
         
-        <category>machine</category>
-        
-        <category>learning,</category>
-        
-        <category>nlp,</category>
-        
-        <category>text</category>
-        
-        <category>clustering</category>
+        <category>random</category>
         
       </item>
     
