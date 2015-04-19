@@ -2,13 +2,71 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>George&#39;s Tech Musings</title>
-    <description>Machine Learning / Big Data developer in PDX trying to build skynet
+    <description>Machine Learning / Big Data developer in PDX trying to build a nicer skynet
 </description>
     <link>georgedittmar.github.io/</link>
     <atom:link href="georgedittmar.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 12 Apr 2015 23:49:07 -0700</pubDate>
-    <lastBuildDate>Sun, 12 Apr 2015 23:49:07 -0700</lastBuildDate>
+    <pubDate>Sat, 18 Apr 2015 00:52:33 -0700</pubDate>
+    <lastBuildDate>Sat, 18 Apr 2015 00:52:33 -0700</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Text Clustering Part 1: A Document is Multi Dimensional!</title>
+        <description>&lt;p&gt;This begins the first part of a series on clustering text and more specifically documents using simple features and algorithms. Later
+in this series I might touch upon how to do this at a larger scale using Spark or Hadoop. The goal of this series is to get people familiar with
+some basic Information Retrieval techniques that are applicable to many domains involving text extracting and learning simple models using textual
+information. Part of this motivation also comes from a project I started a year ago to do simple text clustering of documents in plain text
+using unsupervised learning techniques. &lt;a href=&quot;https://github.com/GeorgeDittmar/TextClustering&quot;&gt;The TextClustering project&lt;/a&gt; was a java project that I started a few years ago to build a framework to do
+clustering of text and other natural language processing techniques. It hasnt moved as far as I would have liked due to other interests
+and work taking up time, but I might make sure the last of the basic functionality works at least for the purpose of extending this blog.&lt;/p&gt;
+
+&lt;h2 id=&quot;vector-space-basics&quot;&gt;Vector Space Basics&lt;/h2&gt;
+
+&lt;p&gt;To start off we need to get some terminology down and understand some underlying mathematics we will be using to ultimately create the document clusters.
+First off we need to understand what a &lt;a href=&quot;http://en.wikipedia.org/wiki/Vector_space_model&quot;&gt;Vector Space Model&lt;/a&gt; is and some basic operations we will be performing on such a model.
+The linked wiki explains vector space model fairly well but I will try to give a nice summary with an example or two that might make it more clear and concrete.&lt;/p&gt;
+
+&lt;p&gt;Say for instance we have two documents D&lt;sub&gt;1&lt;/sub&gt; and D&lt;sub&gt;2&lt;/sub&gt; which are just 4 word sentences. Our documents D&lt;sub&gt;1&lt;/sub&gt; and D&lt;sub&gt;2&lt;/sub&gt; can be represented as a vector of terms seen below.&lt;/p&gt;
+
+&lt;p&gt;D&lt;sub&gt;1&lt;/sub&gt; = (Cash,is,a,cool,dog)&lt;/p&gt;
+
+&lt;p&gt;D&lt;sub&gt;2&lt;/sub&gt; = (Chase,puts,up,with,Cash)&lt;/p&gt;
+
+&lt;p&gt;A vector space model can be thought of as the space where all of these documents “live” given that each term from our document vectors is a dimension inside that space. So for instance
+we could rewrite these vectors to be representative of what they should look like when living inside the vector space. We assume that these documents live within a common vector space
+which means we can rewrite them to be a series of 0 or 1’s if a term in the vector space is present in the document. So for example our documents then become represented as&lt;/p&gt;
+
+&lt;p&gt;Vector space terms = (a, cash, chase, cool, dog, is, puts, up, with)&lt;/p&gt;
+
+&lt;p&gt;D&lt;sub&gt;1&lt;/sub&gt; = (1,1,0,1,1,1,0)&lt;/p&gt;
+
+&lt;p&gt;D&lt;sub&gt;2&lt;/sub&gt; = (Chase,puts,up,with,Cash)&lt;/p&gt;
+
+&lt;p&gt;We treat the document vectors similar to how we would treat vectors in linear algebra which means we can use the same operations on them!&lt;/p&gt;
+
+&lt;h4 id=&quot;term-vectors&quot;&gt;Term Vectors&lt;/h4&gt;
+
+&lt;p&gt;First off lets define what a term vector is. Basically its a vector of terms. That’s about it. Well its not THAT simple but its easy to think of it that way.
+Say we have a document D and we want to get its term vector. Well the term vector of that document could be thought of as D_t = (w1,w2,w3,…,wn), where w1 through wn are all the words found
+in that document upto word n. We want these vectors to contain non-zero count terms because it makes no sense to include a term that is not in D in its term vector. Now the values of these w_i elements
+can be as simple as the counts of the number of times a word appears in the&lt;/p&gt;
+
+&lt;h2 id=&quot;information-retrieval-basics&quot;&gt;Information Retrieval Basics&lt;/h2&gt;
+
+&lt;p&gt;This section covers some of the aspects of Information Retrieval that come into play when dealing with processing documents for machine learning.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 13 Apr 2015 15:21:00 -0700</pubDate>
+        <link>georgedittmar.github.io/clustering,/machine/learning/2015/04/13/Text-Clustering-Part1.html</link>
+        <guid isPermaLink="true">georgedittmar.github.io/clustering,/machine/learning/2015/04/13/Text-Clustering-Part1.html</guid>
+        
+        
+        <category>clustering,</category>
+        
+        <category>machine</category>
+        
+        <category>learning</category>
+        
+      </item>
     
       <item>
         <title>Insert Title Here...</title>
