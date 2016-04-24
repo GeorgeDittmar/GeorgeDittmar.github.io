@@ -6,65 +6,114 @@
 </description>
     <link>georgedittmar.github.io/</link>
     <atom:link href="georgedittmar.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 18 Apr 2015 00:52:33 -0700</pubDate>
-    <lastBuildDate>Sat, 18 Apr 2015 00:52:33 -0700</lastBuildDate>
+    <pubDate>Sun, 24 Apr 2016 15:44:18 -0700</pubDate>
+    <lastBuildDate>Sun, 24 Apr 2016 15:44:18 -0700</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
-        <title>Text Clustering Part 1: A Document is Multi Dimensional!</title>
-        <description>&lt;p&gt;This begins the first part of a series on clustering text and more specifically documents using simple features and algorithms. Later
-in this series I might touch upon how to do this at a larger scale using Spark or Hadoop. The goal of this series is to get people familiar with
-some basic Information Retrieval techniques that are applicable to many domains involving text extracting and learning simple models using textual
-information. Part of this motivation also comes from a project I started a year ago to do simple text clustering of documents in plain text
-using unsupervised learning techniques. &lt;a href=&quot;https://github.com/GeorgeDittmar/TextClustering&quot;&gt;The TextClustering project&lt;/a&gt; was a java project that I started a few years ago to build a framework to do
-clustering of text and other natural language processing techniques. It hasnt moved as far as I would have liked due to other interests
-and work taking up time, but I might make sure the last of the basic functionality works at least for the purpose of extending this blog.&lt;/p&gt;
+        <title>Setting up Spark and PyCharm the hard way...</title>
+        <description>&lt;p&gt;I only say the hardway because it ended up being more tedious than I remember compared to using Spark with Scala. I still
+prefer Scala to the Python implementation of Spark but in some cases Scala might be a bit heavy handed so thats where PySpark
+can come in handy. This goes over setting up the basic dev environment and getting it setup in your PyCharm projects. This 
+tutorial assumes you are running Mac OSX and have the base dependencies in place to run spark such as java 7+, python 2.7+ or
+python 3.1+ etc. These steps will be very similar to how you can setup spark on a linux environment as well.&lt;/p&gt;
 
-&lt;h2 id=&quot;vector-space-basics&quot;&gt;Vector Space Basics&lt;/h2&gt;
+&lt;h2 id=&quot;setting-up-the-environment&quot;&gt;Setting Up the Environment&lt;/h2&gt;
 
-&lt;p&gt;To start off we need to get some terminology down and understand some underlying mathematics we will be using to ultimately create the document clusters.
-First off we need to understand what a &lt;a href=&quot;http://en.wikipedia.org/wiki/Vector_space_model&quot;&gt;Vector Space Model&lt;/a&gt; is and some basic operations we will be performing on such a model.
-The linked wiki explains vector space model fairly well but I will try to give a nice summary with an example or two that might make it more clear and concrete.&lt;/p&gt;
+&lt;p&gt;First and formost you need to grab Spark from the Apache site &lt;a href=&quot;http://spark.apache.org/downloads.html&quot;&gt;here&lt;/a&gt;. The latest version 1.6.1
+should be compatible with current instances of EMR if you are on AWS or whichever version you need for your own personal Hadoop
+cluster. There is also the option for a hadoop free build of spark but I have not looked into that yet. Once that is downloaded 
+extract the tar into your favorite library location. For myself I created a directory under /opt.&lt;/p&gt;
 
-&lt;p&gt;Say for instance we have two documents D&lt;sub&gt;1&lt;/sub&gt; and D&lt;sub&gt;2&lt;/sub&gt; which are just 4 word sentences. Our documents D&lt;sub&gt;1&lt;/sub&gt; and D&lt;sub&gt;2&lt;/sub&gt; can be represented as a vector of terms seen below.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;mkdir -p /opt/spark-1.6.1&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;D&lt;sub&gt;1&lt;/sub&gt; = (Cash,is,a,cool,dog)&lt;/p&gt;
+&lt;p&gt;Then extract the content of the spark archive into there. Next you will want to set SPARK_HOME on your path. If you do not already have
+a .bash_profile setup you will want to create one now. I did this below with the following command. You might need to be sudo for this to work.&lt;/p&gt;
 
-&lt;p&gt;D&lt;sub&gt;2&lt;/sub&gt; = (Chase,puts,up,with,Cash)&lt;/p&gt;
+&lt;p&gt;Create the bash_profile&lt;/p&gt;
 
-&lt;p&gt;A vector space model can be thought of as the space where all of these documents “live” given that each term from our document vectors is a dimension inside that space. So for instance
-we could rewrite these vectors to be representative of what they should look like when living inside the vector space. We assume that these documents live within a common vector space
-which means we can rewrite them to be a series of 0 or 1’s if a term in the vector space is present in the document. So for example our documents then become represented as&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;sudo touch ~/.bash_profile&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;Vector space terms = (a, cash, chase, cool, dog, is, puts, up, with)&lt;/p&gt;
+&lt;p&gt;Add SPARK_HOME to the location of your spark install inside .bash_profile&lt;/p&gt;
 
-&lt;p&gt;D&lt;sub&gt;1&lt;/sub&gt; = (1,1,0,1,1,1,0)&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;export SPARK_HOME=/opt/spark-1.6.1&lt;/p&gt;
 
-&lt;p&gt;D&lt;sub&gt;2&lt;/sub&gt; = (Chase,puts,up,with,Cash)&lt;/p&gt;
+  &lt;p&gt;export PATH=$SPARK_HOME/bin:$PATH&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;We treat the document vectors similar to how we would treat vectors in linear algebra which means we can use the same operations on them!&lt;/p&gt;
+&lt;p&gt;Once this is done you should just need to restart the terminal and start up spark-shell in the command line.&lt;/p&gt;
 
-&lt;h4 id=&quot;term-vectors&quot;&gt;Term Vectors&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/pyspark_blog/spark_shell.png&quot; alt=&quot;spark shell terminal&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;First off lets define what a term vector is. Basically its a vector of terms. That’s about it. Well its not THAT simple but its easy to think of it that way.
-Say we have a document D and we want to get its term vector. Well the term vector of that document could be thought of as D_t = (w1,w2,w3,…,wn), where w1 through wn are all the words found
-in that document upto word n. We want these vectors to contain non-zero count terms because it makes no sense to include a term that is not in D in its term vector. Now the values of these w_i elements
-can be as simple as the counts of the number of times a word appears in the&lt;/p&gt;
+&lt;p&gt;If the shell comes up then you have successfully installed spark on your Mac! Next lets set it up to work with pycharm IDE for easy
+pyspark development.&lt;/p&gt;
 
-&lt;h2 id=&quot;information-retrieval-basics&quot;&gt;Information Retrieval Basics&lt;/h2&gt;
+&lt;h2 id=&quot;setting-up-pycharm&quot;&gt;Setting up PyCharm&lt;/h2&gt;
 
-&lt;p&gt;This section covers some of the aspects of Information Retrieval that come into play when dealing with processing documents for machine learning.&lt;/p&gt;
+&lt;p&gt;Now lets try to setup pyspark in pycharm so that we can code and run jobs inside the IDE. First grab the git repo I have
+&lt;a href=&quot;https://github.com/GeorgeDittmar/pyspark-lab&quot;&gt;here&lt;/a&gt; so that we can verify the setup is correct and run a pyspark script. Once that is cloned down
+open pycharm and load up the project. First we need to setup the interpreter to correctly load the spark dependencies we need. Go to 
+the Project Interpreter.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;File -&amp;gt; Default Settings -&amp;gt; Project Interpreter&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You should see this screen below.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/pyspark_blog/project_interpreter.png&quot; alt=&quot;Project Interpreter Screen&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then click on the gear at the top right and select more to get you to this screen…&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/pyspark_blog/inter_path.png&quot; alt=&quot;Interpreter Paths&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then click the file structure icon at the bottom left and click the plus symbol on the next screen to set the path to the 
+local spark install at /opt/spark-1.6.1/python. We want to go to the python directory since we will only be working with python.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/pyspark_blog/spark_local_path.png&quot; alt=&quot;add path&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once that is done you should now see it in the list of interpreter paths python will load up and have access to while you develop.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/pyspark_blog/final_inter_path.png&quot; alt=&quot;added to interpreter&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now lets see if pycharm works correctly with one of the example scripts. Lets take a look at the TextCounts.py example script.
+This script just reads in the sample.txt file which is a chapter from a book found on the gutenberg project that will use spark locally
+to count up the number of times a word is in a document then calculate the term frequency for every word. Right click on the source file and hit run.
+You should see output like below in the IDE’s console. If it runs correctly you should now see which terms are the most frequent from that
+sample document and can now tell all your friends this great stat that was solved using Spark!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/pyspark_blog/run_console.png&quot; alt=&quot;BIG DATA&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you do not see the above output and get some sort of error below like py4j not installed or found then you will need to add that to 
+pycharm manually as well, though it comes packaged with pyspark so should be brought in when loading the interpreter.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/pyspark_blog/error.png&quot; alt=&quot;error&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To resolve this you will need to pull down py4j and luckily pycharm has a package manager to help with that so you can get running quickly.
+Go back to the Default Settings screen like earlier and down at the bottom left hit the plus button. That will bring up the package manager that
+you can then search for py4j. Select the py4j package, not the asphalt-py4j package, and hit install package.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/pyspark_blog/package_manager.png&quot; alt=&quot;package manager&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once that is installed rerun the script and it should now work! Let me know if this was helpful or not or if there are other 
+topics I could cover around spark. Now also whenever you create a new project in pycharm you should have access to all that you already setup
+previously with the python interpreter so you should not need to repeat these steps unless you download a new version of spark.&lt;/p&gt;
 </description>
-        <pubDate>Mon, 13 Apr 2015 15:21:00 -0700</pubDate>
-        <link>georgedittmar.github.io/clustering,/machine/learning/2015/04/13/Text-Clustering-Part1.html</link>
-        <guid isPermaLink="true">georgedittmar.github.io/clustering,/machine/learning/2015/04/13/Text-Clustering-Part1.html</guid>
+        <pubDate>Thu, 21 Apr 2016 15:21:00 -0700</pubDate>
+        <link>georgedittmar.github.io/development,/spark,/pyspark/2016/04/21/Setting-up-PySpark-and-PyCharm.html</link>
+        <guid isPermaLink="true">georgedittmar.github.io/development,/spark,/pyspark/2016/04/21/Setting-up-PySpark-and-PyCharm.html</guid>
         
         
-        <category>clustering,</category>
+        <category>development,</category>
         
-        <category>machine</category>
+        <category>spark,</category>
         
-        <category>learning</category>
+        <category>pyspark</category>
         
       </item>
     
